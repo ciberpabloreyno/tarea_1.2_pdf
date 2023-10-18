@@ -1,0 +1,41 @@
+---
+title: Estadística
+subtitle: "Actividad 1 - Iniciando con R"
+author: "Pablo Antonio Galvan Ortiz"
+date: "13 de Septiembre de 2023"
+output: 
+    prettydoc::html_pretty:
+      theme: leonids
+      highlight: vignette
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Establecer una semilla para reproducibilidad
+set.seed(123)
+
+# Crear un directorio para almacenar los archivos
+dir.create("archivos_uniformes")
+
+# Loop para generar y guardar los archivos
+for (i in 1:40) {
+  # Generar valores aleatorios uniformes
+  valores <- runif(100, min = 0, max = 1)
+  
+  # Crear un archivo de texto (.txt)
+  txt_filename <- paste("archivos_uniformes/archivo_", i, ".txt", sep = "")
+  write.table(valores, file = txt_filename, col.names = FALSE)
+  
+  # Crear un gráfico de densidad y guardarlo como archivo PDF (.pdf)
+  pdf_filename <- paste("archivos_uniformes/archivo_", i, ".pdf", sep = "")
+  pdf(pdf_filename)
+  plot(density(valores), main = paste("Densidad de archivo", i), xlab = "Valores")
+  dev.off()
+}
+
+# Listo, se han creado los archivos y gráficos
+
+```
